@@ -1,0 +1,25 @@
+pipeline {
+         agent any
+         stages {
+                 stage('Clean') {
+                 steps {
+                    echo 'Starting clean phase'
+					bat 'del /S /Q java-app'
+					bat 'git clone git@github.com:sakshamnegi/JenkinsPipelineProject.git'
+					bat 'mvn clean'
+                 }
+                 }
+                 stage('Test') {
+                 steps {
+                    echo 'Starting test phase'
+					bat 'mvn test'
+                 }
+                 }
+                 stage('Package') {
+                 steps {
+                    echo 'Starting package phase'
+					bat 'mvn package'
+                 }
+                 }
+			}
+		}
